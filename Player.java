@@ -1,11 +1,13 @@
-public class Player
+class Player extends PlayerValue
 {
     public Player()
     {
-        PlayerValue characterValue = new PlayerValue();
-        characterValue.SetPlayerValue(this);
+        SetPlayerValue(this);
     }
     public String playerName = "";
+    int maxPlayerHP = 0;
+    int maxPlayerMP = 0;
+
     public int playerHP = 0;
     public int playerMP = 0;
 

@@ -1,15 +1,20 @@
-public class PlayerValue
+class PlayerValue
 {
-    int hP = 80;
-    int mP = 100;
+    final int ORIGINHp = 80;
+    final int ORIGINMp = 100;
 
-    int oriDMG = 10;
-    int skillDMG = 30;
+    private int hP = 80;
+    private int mP = 100;
 
-    int criticalPlusDMG = 10;
+    private int oriDMG = 10;
+    private int skillDMG = 30;
 
-    public void SetPlayerValue(Player _player)
+    private int criticalPlusDMG = 10;
+
+    protected void SetPlayerValue(Player _player)
     {
+        _player.maxPlayerHP = ORIGINHp;
+        _player.maxPlayerMP = ORIGINMp;
         _player.playerHP = hP;
         _player.playerMP = mP;
         _player.playerOriginDMG = oriDMG;

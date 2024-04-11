@@ -7,6 +7,5 @@ public class WizardGame
         Status status = new Status();
 
         status.PlayerStatus(player);
-
     }
 }

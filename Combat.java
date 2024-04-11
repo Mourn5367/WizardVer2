@@ -1,9 +1,16 @@
 
-import java.util.Random;
+import java.security.SecureRandom;
+
 public class Combat
 {
-    Random random = new Random();
-    public void PlayerOriginAttack(Player _player, Enemy _enemy, boolean _critical)
+    SecureRandom random = new SecureRandom();
+    public boolean CreatRandomValue()
+    {
+        float ranValue = random.nextFloat();
+
+        return ranValue <= 0.3;
+    }
+    public void PlayerOriginAttack(Player _player, Enemy _enemy)
     {
         _enemy.enemyHP -= _player.playerOriginDMG;
     }
@@ -22,7 +29,7 @@ public class Combat
 
     public void EnemyAttack(Player _player, Enemy _enemy)
     {
-        _enemy.enemyHP -= _player.playerSkillDMG;
+        _player.playerHP -= _enemy.enemyDMG;
     }
 
     public void PlayerAttack(int _selectAttackMenu, Player _player, Enemy _enemy, boolean _critical)
@@ -32,7 +39,7 @@ public class Combat
 
         switch( _selectAttackMenu)
         {
-            case 1:PlayerOriginAttack(_player,_enemy,_critical);
+            case 1:PlayerOriginAttack(_player,_enemy);
             case 2:PlayerSkillAttack(_player,_enemy,_critical);
         }
     }
