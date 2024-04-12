@@ -12,23 +12,32 @@ public class Combat
     }
     public void PlayerOriginAttack(Player _player, Enemy _enemy)
     {
+        _enemy.beforeEnemyHP = _enemy.enemyHP;
         _enemy.enemyHP -= _player.playerOriginDMG;
     }
 
     public void PlayerSkillAttack (Player _player, Enemy _enemy,boolean _critical)
     {
+
+        _player.beforePlayerMP = _player.playerMP;
+        _player.playerMP -= _player.playerSkillCost[0]; // 이 부분도 마법 추가되면 바뀌어야함
+
         if (_critical)
         {
-            _enemy.enemyHP -= _player.playerOriginDMG + _player.criticalPlusDMG;
+            System.out.println("!! 크리티컬 발생 !!");
+            _enemy.beforeEnemyHP = _enemy.enemyHP;
+            _enemy.enemyHP -= _player.playerSkillDMG + _player.criticalPlusDMG;
         }
         else
         {
-            _enemy.enemyHP -= _player.playerOriginDMG;
+            _enemy.beforeEnemyHP = _enemy.enemyHP;
+            _enemy.enemyHP -= _player.playerSkillDMG;
         }
     }
 
     public void EnemyAttack(Player _player, Enemy _enemy)
     {
+        _player.beforePlayerHP = _player.playerHP;
         _player.playerHP -= _enemy.enemyDMG;
     }
 
@@ -43,5 +52,4 @@ public class Combat
             case 2:PlayerSkillAttack(_player,_enemy,_critical);
         }
     }
-
 }
