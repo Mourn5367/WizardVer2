@@ -4,11 +4,11 @@ public class CombatCondition
     public int EscapeCondition(Player _player,Enemy _enemy)
     {
 
-        if (_player.playerHP == 0 )
+        if (_player.playerHP <= 0 )
         {
             return 0;
         }
-        else if (_enemy.enemyHP == 0)
+        else if (_enemy.enemyHP <= 0)
         {
             return 1;
         }

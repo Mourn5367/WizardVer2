@@ -16,11 +16,19 @@ public class WizardGame
             status.PlayerStatus(player);
             status.PlayerSelectText(player);
 
-            combat.PlayerAttack(inputUserCommand.InputInt(player), player,enemy,
-                                status,combatCondition);
-            if (!combatCondition.isEscape(player,enemy,status) )break;
+            combat.PlayerAttack(inputUserCommand.InputInt(player.playerableAct), player,enemy,
+                                status,combatCondition,inputUserCommand);
+            if (!combatCondition.isEscape(player,enemy,status))
+            {
+                status.AfterCombatStatus(player,enemy);
+                break;
+            }
             combat.EnemyAttack(player,enemy);
-            if (!combatCondition.isEscape(player,enemy,status) )break;
+            if (!combatCondition.isEscape(player,enemy,status))
+            {
+                status.AfterCombatStatus(player,enemy);
+                break;
+            }
             status.AfterCombatStatus(player,enemy);
         }
         System.out.println("모험 끝");

@@ -24,13 +24,13 @@ public class Status
 
     public void EnemyStatus(Enemy _enemy)
     {
-        System.out.printf("적: %s 체력: %d/%d.\n"
+        System.out.printf("적: %s 체력: %d/%d\n"
                 ,_enemy.enemyName, _enemy.enemyHP, _enemy.maxEnemyHP);
     }
 
     public void PlayerStatus(Player _player )
     {
-        System.out.printf("마법사: %s 체력: %d/%d 기력: %d/%d.\n"
+        System.out.printf("마법사: %s 체력: %d/%d 기력: %d/%d\n"
                 ,_player.playerName, _player.playerHP, _player.maxPlayerHP,  _player.playerMP,_player.maxPlayerMP);
     }
 
@@ -68,11 +68,6 @@ public class Status
         {
             PlayerStatus(_player);
             System.out.printf("상태로 %s(을)를 쓰러뜨렸다..!!!\n",_enemy.enemyName);
-
-        }
-        else
-        {
-            System.out.println("격렬한 전투중이다.");
         }
     }
 

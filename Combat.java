@@ -22,7 +22,6 @@ public class Combat
 
         _player.beforePlayerMP = _player.playerMP;
         _player.playerMP -= _player.playerSkillCost[0]; // 이 부분도 마법 추가되면 바뀌어야함
-
         if (_critical)
         {
             System.out.println("!! 크리티컬 발생 !!");
@@ -43,7 +42,8 @@ public class Combat
     }
 
     public void PlayerAttack(int _selectAttackMenu, Player _player,
-                             Enemy _enemy,Status _status,CombatCondition combatCondition)
+                             Enemy _enemy,Status _status,
+                             CombatCondition combatCondition,InputUserCommand inputUserCommand)
     {
         _selectAttackMenu -= 1;
         boolean isCostCondition = false;
@@ -58,22 +58,28 @@ public class Combat
             }
             case 1:
             {
-                _status.PlayerSkillPrint(_player);
-
+                int selectSkill = 0;
                 if (_player.playerMP <_player.MinSkillCost())
                 {
-                    System.out.printf("기력이 %d 보다 작아 %s(을)를 사용합니다.\n",
-                            _player.MinSkillCost(),_player.playerableAct[0]);
-
-                    System.out.printf("%s !!\n",_player.playerableAct[_selectAttackMenu]);
-                    PlayerOriginAttack(_player,_enemy);
+                    NoneSkillCost(_player,_enemy,_status);
                     break;
                 }
-                System.out.printf("%s !!\n",_player.playerableAct[_selectAttackMenu]);
+                _status.PlayerSkillPrint(_player);
+                selectSkill = inputUserCommand.SelectSkill(_player,_status);
+                System.out.printf("%s !!\n",_player.playerSkill[selectSkill]);
                 PlayerSkillAttack(_player,_enemy,CreatRandomValue());
                 break;
             }
         }
+    }
+
+    public void NoneSkillCost(Player _player,Enemy _enemy,Status _status)
+    {
+        _status.NotEnoughMPPrint(_player);
+        System.out.printf("기력이 최소 요구량 %d 보다 작아 %s(을)를 사용합니다.\n",
+        _player.MinSkillCost(), _player.playerableAct[0]);
+        System.out.printf("%s !!\n", _player.playerableAct[0]);
+        PlayerOriginAttack(_player,_enemy);
     }
 
 }
