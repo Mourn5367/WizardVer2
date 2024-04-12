@@ -10,6 +10,7 @@ public class Combat
 
         return ranValue <= 0.3;
     }
+
     public void PlayerOriginAttack(Player _player, Enemy _enemy)
     {
         _enemy.beforeEnemyHP = _enemy.enemyHP;
@@ -41,15 +42,38 @@ public class Combat
         _player.playerHP -= _enemy.enemyDMG;
     }
 
-    public void PlayerAttack(int _selectAttackMenu, Player _player, Enemy _enemy, boolean _critical)
+    public void PlayerAttack(int _selectAttackMenu, Player _player,
+                             Enemy _enemy,Status _status,CombatCondition combatCondition)
     {
-
+        _selectAttackMenu -= 1;
+        boolean isCostCondition = false;
         float _criticalValue =  random.nextFloat();
-
         switch( _selectAttackMenu)
         {
-            case 1:PlayerOriginAttack(_player,_enemy);
-            case 2:PlayerSkillAttack(_player,_enemy,_critical);
+            case 0:
+            {
+                System.out.printf("%s !!\n",_player.playerableAct[_selectAttackMenu]);
+                PlayerOriginAttack(_player,_enemy);
+                break;
+            }
+            case 1:
+            {
+                _status.PlayerSkillPrint(_player);
+
+                if (_player.playerMP <_player.MinSkillCost())
+                {
+                    System.out.printf("기력이 %d 보다 작아 %s(을)를 사용합니다.\n",
+                            _player.MinSkillCost(),_player.playerableAct[0]);
+
+                    System.out.printf("%s !!\n",_player.playerableAct[_selectAttackMenu]);
+                    PlayerOriginAttack(_player,_enemy);
+                    break;
+                }
+                System.out.printf("%s !!\n",_player.playerableAct[_selectAttackMenu]);
+                PlayerSkillAttack(_player,_enemy,CreatRandomValue());
+                break;
+            }
         }
     }
+
 }

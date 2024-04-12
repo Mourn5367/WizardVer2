@@ -2,7 +2,7 @@ class PlayerValue
 {
     private String playername = "Gandalf";
     final int ORIGINHp = 80;
-    final int ORIGINMp = 100;
+    final int ORIGINMp = 40;
 
     private int oriDMG = 10;
     private int skillDMG = 30;

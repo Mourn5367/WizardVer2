@@ -8,18 +8,14 @@ public class InputUserCommand
        this.input = new Scanner(System.in);
     }
 
-    public int InputInt()
+    public int InputInt(Player _player)
     {
-        System.out.print("명령을 입력 해 주세요\n");
-        System.out.print("1. asd\t2. asd\t3. asd\n");
-
-        return ParsingInt();
-
+        return ParsingInt(_player);
     }
 
-    public int ParsingInt()
+    public int ParsingInt(Player _player)
     {
-        boolean noneException =true;
+        boolean noneException =false;
         int noneExceptionIntText = 0;
         while(!noneException)
         {
@@ -27,18 +23,31 @@ public class InputUserCommand
             {
                 noneExceptionIntText = Integer.parseInt(input.nextLine());
 
-                if (noneExceptionIntText != 1) //여기서 선택지를 이외의 값을 가져오면 다시 받게하자
+                if (noneExceptionIntText > 0 && noneExceptionIntText <= _player.playerableAct.length ) //여기서 선택지를 이외의 값을 가져오면 다시 받게하자
                 {
-                    noneException = false;
+                    noneException = true;
+
                 }
                 else
                 {
-                    noneException = true;
+                    System.out.print("나는 ");
+                    for (int i = 0; i < _player.playerableAct.length; i++)
+                    {
+                        System.out.printf("숫자 %d\t",i+1);
+                    }
+                    System.out.print("말고는 못 알아먹겠어 !\n");
+                    noneException = false;
                 }
             }
             catch (NumberFormatException numException)
             {
-                System.out.println("못알아먹겠어 !");
+
+                System.out.print("나는 ");
+                for (int i = 0; i < _player.playerableAct.length; i++)
+                {
+                    System.out.printf("숫자 %d\t",i+1);
+                }
+                System.out.print("말고는 못 알아먹겠어 !\n");
             }
         }
 
@@ -46,5 +55,12 @@ public class InputUserCommand
 
     }
 
+    public void IsNotEnoughMPCost(Player _player, Status _status)
+    {
+        _status.NotEnoughMPPrint(_player);
+        _status.PlayerSelectText(_player);
+        InputInt(_player);
+
+    }
 
 }
