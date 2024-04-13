@@ -4,6 +4,7 @@ class Player extends PlayerValue
     {
         SetPlayerValue(this);
     }
+
     public String playerName = "";
     int maxPlayerHP = 0;
     int maxPlayerMP = 0;
