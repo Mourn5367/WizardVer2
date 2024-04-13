@@ -1,16 +1,5 @@
-class Enemy extends EnemyValue
+class Enemy extends Unit implements Monster
 {
-    public Enemy()
-    {
-        SetEnemyValue(this);
-    }
 
-
-    public String enemyName = "";
-    public int maxEnemyHP = 0;
-    public int enemyHP = 0;
-
-    public int beforeEnemyHP = 0;
-    public int enemyDMG = 0;
 }
 

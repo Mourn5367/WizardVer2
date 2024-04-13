@@ -1,37 +1,31 @@
 public class WizardGame
 {
-    public static void main(String[] args)
-    {
-        Player player = new Player();
-        Enemy enemy = new Enemy();
-        Status status = new Status();
-        Combat combat = new Combat();
+    public static void main(String[] args) throws InterruptedException {
         InputUserCommand inputUserCommand = new InputUserCommand();
         CombatCondition combatCondition = new CombatCondition();
+        Status status = new Status();
+        Combat combat = new Combat();
+        Player player = new Player();
+        Enemy enemy = new Enemy();
+
+        player.SetWizard(player);
+        enemy.SetMonster(enemy);
+
+        inputUserCommand.SetName(player,status);
+
         status.MeetingScene(player,enemy);
 
-        while (true)
+        while(true)
         {
-            status.EnemyStatus(enemy);
-            status.PlayerStatus(player);
-            status.PlayerSelectText(player);
-
-            combat.PlayerAttack(inputUserCommand.InputInt(player.playerableAct), player,enemy,
-                                status,combatCondition,inputUserCommand);
-            if (!combatCondition.isEscape(player,enemy,status))
-            {
-                status.AfterCombatStatus(player,enemy);
-                break;
-            }
-            combat.EnemyAttack(player,enemy);
-            if (!combatCondition.isEscape(player,enemy,status))
-            {
-                status.AfterCombatStatus(player,enemy);
-                break;
-            }
-            status.AfterCombatStatus(player,enemy);
+            status.SelectText(player.ableList);
+            combat.UnitAttack(inputUserCommand.InputInt(player.ableList),player,enemy
+                    ,status,inputUserCommand);
+            if(!combatCondition.IsEscape(enemy,status)) {break;}
+            status.UnitStatus(enemy);
+            combat.OriginAttack(enemy,player);
+            if(!combatCondition.IsEscape(player,status)) {break;}
+            status.UnitStatus(player);
+            status.AfterCombatStatusSymbol(player,enemy);
         }
-        System.out.println("모험 끝");
-
     }
 }

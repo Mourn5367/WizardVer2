@@ -8,12 +8,12 @@ public class InputUserCommand
        this.input = new Scanner(System.in);
     }
 
-    public int InputInt(String[] _playerArray)
+    public int InputInt(String[] _inputArray)
     {
-        return ParsingInt(_playerArray);
+        return ParsingInt(_inputArray);
     }
 
-    public int ParsingInt(String[] _playerArray )
+    public int ParsingInt(String[] _inputArray )
     {
         boolean noneException =false;
         int noneExceptionIntText = 0;
@@ -22,7 +22,7 @@ public class InputUserCommand
             try
             {
                 noneExceptionIntText = Integer.parseInt(input.nextLine());
-                if (noneExceptionIntText > 0 && noneExceptionIntText <= _playerArray.length )
+                if (noneExceptionIntText > 0 && noneExceptionIntText <= _inputArray.length )
                     //여기서 선택지를 이외의 값을 가져오면 다시 받게하자
                 {
                     noneException = true;
@@ -30,7 +30,7 @@ public class InputUserCommand
                 else
                 {
                     System.out.print("나는 ");
-                    for (int i = 0; i < _playerArray.length; i++)
+                    for (int i = 0; i < _inputArray.length; i++)
                     {
                         System.out.printf("숫자 %d\t",i+1);
                     }
@@ -42,7 +42,7 @@ public class InputUserCommand
             {
 
                 System.out.print("나는 ");
-                for (int i = 0; i < _playerArray.length; i++)
+                for (int i = 0; i < _inputArray.length; i++)
                 {
                     System.out.printf("숫자 %d\t",i+1);
                 }
@@ -52,17 +52,29 @@ public class InputUserCommand
         return noneExceptionIntText;
     }
 
-    public int SelectSkill(Player _player, Status _status)
+    public int SelectSkill(SkillUnit _skillUnit, Status _status)
     {
-        int selectSkill = InputInt(_player.playerSkill) - 1;
+        int selectSkill = InputInt(_skillUnit.skill) - 1;
 
-        while(_player.playerMP <= _player.playerSkillCost[selectSkill])
+        while(_skillUnit.MP <= _skillUnit.skillCost[selectSkill])
         {
-            selectSkill = InputInt(_player.playerSkill);
-            _status.NotEnoughMPPrint(_player);
-            _status.PlayerSelectText(_player);
+            selectSkill = InputInt(_skillUnit.skill);
+            _status.NotEnoughMPPrint(_skillUnit,selectSkill);
+            _status.SkillUnitSelectText(_skillUnit);
         }
         return selectSkill;
     }
 
+    public void SetName(Unit _unit,Status status)
+    {
+        String setNameMenu[] = {"작명한다.","기본이름으로"};
+        status.SelectText(setNameMenu);
+        int inputMenu = ParsingInt(setNameMenu);
+        if (inputMenu == 1)
+        {
+            System.out.print("이름을 입력하세요 :");
+            _unit.name = input.nextLine();
+        }
+        System.out.printf("당신의 이름은 %s입니다 !\n",_unit.name);
+    }
 }

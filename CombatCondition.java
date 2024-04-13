@@ -2,47 +2,35 @@
 public class CombatCondition
 {
 
-    public int EscapeCondition(Player _player,Enemy _enemy)
+    public boolean EscapeCondition(Unit _unit)
     {
-
-        if (_player.playerHP <= 0 )
+        if (_unit.HP <= 0 )
         {
-            return 0;
+            return true;
         }
-        else if (_enemy.enemyHP <= 0)
-        {
-            return 1;
-        }
-        else
-        {
-            return 2;
-        }
-
+        else return false;
     }
-    public boolean isEscape(Player _player, Enemy _enemy, Status status)
-    {
-        if (EscapeCondition(_player,_enemy) == 0 )
-        {
-            status.EndCombatPrint(EscapeCondition(_player,_enemy), _player,_enemy);
+    public boolean IsEscape(Unit _unit, Status status) throws InterruptedException {
+        Thread.sleep(1000);
+        if (EscapeCondition(_unit) == true) {
+            status.EndCombatPrint(EscapeCondition(_unit), _unit);
+            Thread.sleep(500);
             return false;
+        } else {
+            System.out.printf("공격을 마쳤다...\n");
+            Thread.sleep(500);
+            return true;
         }
-        if (EscapeCondition(_player,_enemy) == 1 )
-        {
-            status.EndCombatPrint(EscapeCondition(_player,_enemy), _player,_enemy);
-            return false;
-        }
-        return true;
     }
 
-    public boolean SkillCostCondition(Player _player,Status _status) // 나중에 스킬 여러개면 사용
+    public boolean SkillCostCondition(Player _player,Status _status,int _selectSkill) // 나중에 스킬 여러개면 사용
     {
-        if (_player.playerMP < _player.playerSkillCost[0])
+        if (_player.MP < _player.skillCost[_selectSkill])
         {
-            _status.NotEnoughMPPrint(_player);
+            _status.NotEnoughMPPrint(_player,_selectSkill);
             return false;
         }
         else return true;
     }
-
 
 }

@@ -1,9 +1,7 @@
-
-
-
+import java.util.Random;
 public class Status
 {
-
+    Random random = new Random();
     public void TimeSleep(int _time,String _message)
     {
         for (int i = 0; i < 3; i++ )
@@ -14,77 +12,130 @@ public class Status
             {InterException.printStackTrace();}
         }
     }
-
-    public void MeetingScene(Player _player,Enemy _enemy)
+    public void MeetingScene(Unit _unit1,Unit _unit2)
     {
-        TimeSleep(1,"몬스터 접근중 !\n");
+        TimeSleep(500,"몬스터 접근중 !\n");
 
-        System.out.printf("마법사 %s(이)가 야생의 %s를 만났다!!\n\n",_player.playerName,_enemy.enemyName);
+        System.out.printf("%s %s(이)가 야생의 %s %s를 만났다!!\n\n"
+                ,_unit1.unitClass,_unit1.name, _unit2.unitClass,_unit2.name);
     }
 
-    public void EnemyStatus(Enemy _enemy)
+    public void UnitStatus(Unit _unit)
     {
-        System.out.printf("적: %s 체력: %d/%d\n"
-                ,_enemy.enemyName, _enemy.enemyHP, _enemy.maxEnemyHP);
-    }
-
-    public void PlayerStatus(Player _player )
-    {
-        System.out.printf("마법사: %s 체력: %d/%d 기력: %d/%d\n"
-                ,_player.playerName, _player.playerHP, _player.maxPlayerHP,  _player.playerMP,_player.maxPlayerMP);
-    }
-
-    public void PlayerSelectText(Player _player)
-    {
-        for (int i = 0; i < _player.playerableAct.length; i++)
+        SkillUnit skillUnit;
+        if (_unit instanceof SkillUnit)
         {
-            System.out.printf("%d. %s\t",i+1,_player.playerableAct[i]);
+            skillUnit =(SkillUnit)_unit;
+            System.out.printf("%s: %s 체력: %d/%d 기력: %d/%d\n"
+                ,skillUnit.unitClass, skillUnit.name, skillUnit.HP,skillUnit.maxHP,
+                    skillUnit.MP, skillUnit.maxMP);
+        }
+        else
+        {
+            System.out.printf("%s: %s 체력: %d/%d\n"
+                    ,_unit.unitClass,_unit.name, _unit.HP,_unit.maxHP);
+        }
+    }
+    public void SelectText(String[] _array)
+    {
+        for (int i = 0; i < _array.length; i++)
+        {
+            System.out.printf("%d. %s\t",i+1,_array[i]);
         }
         System.out.println();
     }
-    public void AfterCombatStatus(Player _player, Enemy _enemy)
+    public void SkillUnitSelectText(SkillUnit _SkillUnit)
+    {
+        for (int i = 0; i < _SkillUnit.ableList.length; i++)
+        {
+            System.out.printf("%d. %s\t",i+1,_SkillUnit.ableList[i]);
+        }
+        System.out.println();
+    }
+    public void AfterCombatStatusText(Unit _unit1, Unit _unit2)
     {
         System.out.printf("%s(이)가 %d의 피해를 입어 %d/%d의 체력이 되었고 %s(이)가 %d의 피해를 입어 %d/%d 체력이 되었다!\n"
-                ,_player.playerName, _player.beforePlayerHP - _player.playerHP, _player.playerHP,_player.maxPlayerHP,
-                        _enemy.enemyName, _enemy.beforeEnemyHP -  _enemy.enemyHP, _enemy.enemyHP,_enemy.maxEnemyHP);
+                ,_unit1.name, _unit1.beforeHP - _unit1.HP, _unit1.HP,_unit1.maxHP,
+                _unit2.name, _unit2.beforeHP - _unit2.HP, _unit2.HP,_unit2.maxHP);
     }
-
-    public void AfterPlayerSkillStatus(Player _player) //나중에 마법여러개 일때는 바꿔야함
+    public void AfterCombatStatusSymbol(Unit _unit1, Unit _unit2)
+    {
+        System.out.printf("%s(이)가 ",_unit1.name);
+        UnitHPPrint(_unit1.beforeHP - _unit1.HP);
+        System.out.printf("의 피해를 입어 ");
+        UnitHPPrint(_unit1);
+        System.out.printf("의 체력이 되었고 %s가 ",_unit2.name);
+        UnitHPPrint(_unit2.beforeHP - _unit2.HP);
+        System.out.printf("의 피해를 입어 ");
+        UnitHPPrint(_unit2);
+        System.out.println("의 체력이 되었다...!!\n");
+    }
+    public void AfterUnitSkillStatus(SkillUnit _skillUnit, int selectSkill) //나중에 마법여러개 일때는 바꿔야함
     {
         System.out.printf("%s을(를) 사용하여 기력을 %d 사용했다\n" +
-                "기력이 %d/%d 남았다 !", _player.playerSkill[0], _player.playerSkillCost[0],
-                                    _player.playerMP,_player.maxPlayerMP);
+                "기력이 %d/%d 남았다 !\n", _skillUnit.skill[selectSkill], _skillUnit.skillCost[selectSkill],
+                                    _skillUnit.MP,_skillUnit.maxMP);
     }
-
-    public void EndCombatPrint(int _escapeCombatConditionNum, Player _player, Enemy _enemy)
+    public void EndCombatPrint(boolean _isEscapeCombatCondition, Unit _unit)
     {
-        if ( _escapeCombatConditionNum == 0)
+        if (_isEscapeCombatCondition == true)
         {
-            EnemyStatus(_enemy);
-            System.out.printf("남겨둔채 %s(이)가 쓰러졌다..!!!\n",_player.playerName);
-
-        }
-        else if (_escapeCombatConditionNum == 1)
-        {
-            PlayerStatus(_player);
-            System.out.printf("상태로 %s(을)를 쓰러뜨렸다..!!!\n",_enemy.enemyName);
+            if (_unit instanceof Player)
+            {
+                UnitStatus(_unit);
+                System.out.printf("%s는 %d의 나이로 생을 마감했다...\n",_unit.name,
+                        random.nextInt(20,100));
+            }
+            else if (_unit instanceof Enemy)
+            {
+                UnitStatus(_unit);
+                System.out.printf("%s를 쓰러뜨렸다...!!!\n",_unit.name);
+            }
         }
     }
-
-    public void NotEnoughMPPrint(Player _player) // 스킬 추가 되면 변경
+    public void NotEnoughMPPrint(SkillUnit skillUnit,int _selectSkill) // 스킬 추가 되면 변경
     {
         System.out.printf("기력이 %d이므로 기력 %d(을)를 소모하는 %s을 할수없어 !!\n"
-                ,_player.playerMP,_player.playerSkillCost[0],_player.playerableAct[1]);
+                ,skillUnit.MP,skillUnit.skillCost[_selectSkill],skillUnit.skill[_selectSkill]);
 
     }
-
-    public void PlayerSkillPrint(Player _player)
+    public void SkillUnitSkillPrint(SkillUnit _skillUnit)
     {
-        for (int i = 0; i < _player.playerSkill.length;i++)
+        for (int i = 0; i < _skillUnit.skill.length;i++)
         {
             System.out.printf("%d. ",i+1);
-            System.out.printf("%s ",_player.playerSkill[i]);
+            System.out.printf("%s ",_skillUnit.skill[i]);
         }
         System.out.println();
     }
+
+    public void UnitHPPrint(Unit _unit)
+    {
+        if (_unit.HP % 10 !=0)
+        {
+            System.out.printf("💔");
+        }
+        for (int i = 0; i < _unit.HP/10; i++)
+        {
+            System.out.printf("💖");
+        }
+        for (int i = 0; i < (_unit.maxHP - _unit.HP)/10; i++)
+        {
+            System.out.printf("🤍");
+        }
+    }
+    public void UnitHPPrint(int _damage)
+    {
+        if (_damage % 10 !=0)
+        {
+            System.out.printf("💔");
+        }
+        for (int i = 0; i < _damage/10; i++)
+        {
+            System.out.printf("💖");
+        }
+    }
+
+
+
 }
