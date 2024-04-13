@@ -78,7 +78,7 @@ public class Status
     }
     public void EndCombatPrint(boolean _isEscapeCombatCondition, Unit _unit)
     {
-        if (_isEscapeCombatCondition == true)
+        if (_isEscapeCombatCondition)
         {
             if (_unit instanceof Player)
             {

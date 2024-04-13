@@ -1,4 +1,3 @@
-
 public class CombatCondition
 {
 
@@ -12,7 +11,7 @@ public class CombatCondition
     }
     public boolean IsEscape(Unit _unit, Status status) throws InterruptedException {
         Thread.sleep(1000);
-        if (EscapeCondition(_unit) == true) {
+        if (EscapeCondition(_unit)) {
             status.EndCombatPrint(EscapeCondition(_unit), _unit);
             Thread.sleep(500);
             return false;
@@ -22,15 +21,4 @@ public class CombatCondition
             return true;
         }
     }
-
-    public boolean SkillCostCondition(Player _player,Status _status,int _selectSkill) // 나중에 스킬 여러개면 사용
-    {
-        if (_player.MP < _player.skillCost[_selectSkill])
-        {
-            _status.NotEnoughMPPrint(_player,_selectSkill);
-            return false;
-        }
-        else return true;
-    }
-
 }

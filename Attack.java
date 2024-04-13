@@ -1,7 +1,5 @@
-
-
 import java.security.SecureRandom;
-public interface Attack extends LoadingText
+interface Attack extends LoadingText
 {
     default boolean CreatRandomValue()
     {
@@ -10,11 +8,11 @@ public interface Attack extends LoadingText
         return ranValue <= 0.3;
     }
     SecureRandom random = new SecureRandom();
-    default void OriginAttack(Unit _offense,Unit _deffense)
+    default void OriginAttack(Unit _offense,Unit _defense)
     {
         System.out.printf("%s !!\n",_offense.ableList[0]);
-        _deffense.beforeHP = _deffense.HP;
-        _deffense.HP -= _offense.originDMG;
+        _defense.beforeHP = _defense.HP;
+        _defense.HP -= _offense.originDMG;
     }
 
     default void PlayerSkillAttack(SkillUnit _skillUnit, Unit _deffense, int _sellectSkill) throws InterruptedException {
