@@ -2,10 +2,10 @@ import java.util.Scanner;
 
 public class InputUserCommand
 {
-    private Scanner input;
+    private Scanner scanner;
     public InputUserCommand()
     {
-       this.input = new Scanner(System.in);
+       this.scanner = new Scanner(System.in);
     }
 
     public int InputInt(String[] _inputArray)
@@ -21,7 +21,7 @@ public class InputUserCommand
         {
             try
             {
-                noneExceptionIntText = Integer.parseInt(input.nextLine());
+                noneExceptionIntText = Integer.parseInt(scanner.nextLine());
                 if (noneExceptionIntText > 0 && noneExceptionIntText <= _inputArray.length )
                     //여기서 선택지를 이외의 값을 가져오면 다시 받게하자
                 {
@@ -67,14 +67,30 @@ public class InputUserCommand
 
     public void SetName(Unit _unit,Status status)
     {
+        StringBuilder stringBuilder = new StringBuilder();
+        int maxNameLength = 7;
         String setNameMenu[] = {"작명한다.","기본이름으로"};
         status.SelectText(setNameMenu);
         int inputMenu = ParsingInt(setNameMenu);
         if (inputMenu == 1)
         {
-            System.out.print("이름을 입력하세요 :");
-            _unit.name = input.nextLine();
+
+            System.out.print("이름을 입력하세요 최대 7 글자까지 됩니다. :");
+            while(true)
+            {
+                String unitName = scanner.nextLine();
+                if (unitName.length() > maxNameLength)
+                {
+                    System.out.println("7글자를 초과하였습니다.");
+                    System.out.print("이름을 입력하세요 최대 7 글자까지 됩니다. :");
+                }
+                else
+                {
+                    _unit.name = unitName;
+                    break;
+                }
+            }
         }
-        System.out.printf("당신의 이름은 %s입니다 !\n",_unit.name);
+        System.out.printf("\n당신의 이름은 %s입니다 !\n\n",_unit.name);
     }
 }
