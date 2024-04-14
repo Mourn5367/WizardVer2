@@ -1,0 +1,17 @@
+WizardGame
+
+Unit
+
+SkillUnit 
+
+Player Enemy
+Wizard	Monster
+
+Combat
+Attack
+
+CombatCodition
+
+Status
+
+LoadingText
