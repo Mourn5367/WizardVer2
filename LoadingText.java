@@ -18,4 +18,32 @@ public interface LoadingText {
         }
         System.out.println();
     }
+
+    default void GameLoadingText() throws InterruptedException
+    {
+        int loadingText = random.nextInt(2,4);
+
+        System.out.print("마법사와 몬스터 구동중");
+        for (int i =0; i < 3; i++)
+        {
+            System.out.print(". ");
+            Thread.sleep(1000);
+        }
+        System.out.print("\n");
+        System.out.print("준비가 거의 다 되었습니다.\n");
+        System.out.print("[");
+        for (int i =0; i < loadingText; i++)
+        {
+            System.out.print("|");
+            Thread.sleep(random.nextInt(1000, 2000));
+        }
+       for (int i = 0;i <3; i++)
+       {
+           System.out.print("|");
+           Thread.sleep(300);
+       }
+        System.out.print("]\n");
+        System.out.println("준비되었습니다.");
+        Thread.sleep(1000);
+    }
 }

@@ -1,5 +1,5 @@
 import java.util.Random;
-public class Status
+public class Status implements LoadingText
 {
     Random random = new Random();
     public void TimeSleep(int _time,String _message)

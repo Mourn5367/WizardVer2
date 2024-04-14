@@ -10,6 +10,7 @@ public class WizardGame
 
         player.SetWizard(player);
         enemy.SetMonster(enemy);
+        status.GameLoadingText();
 
         inputUserCommand.SetName(player,status);
 
