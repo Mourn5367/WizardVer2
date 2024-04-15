@@ -1,11 +1,19 @@
 import java.security.SecureRandom;
 interface Attack extends LoadingText
 {
-    default boolean CreatRandomValue()
+    default boolean CreatRandomValue(int _selectRandomValue,SkillUnit _skillUnit) // 0은 크리티컬
     {
-        float ranValue = random.nextFloat();
+        double ranValue = random.nextDouble();
 
-        return ranValue <= 0.3;
+        switch (_selectRandomValue)
+        {
+            case 0:
+            {
+                return ranValue < _skillUnit.criticalPercent;
+            }
+            default:
+                return false;
+        }
     }
     SecureRandom random = new SecureRandom();
     default void OriginAttack(Unit _offense,Unit _defense)
@@ -20,7 +28,7 @@ interface Attack extends LoadingText
         _skillUnit.MP -= _skillUnit.skillCost[_sellectSkill];
         System.out.printf("%s !!\n",_skillUnit.skill[_sellectSkill]);
         LoadingTextPrint();
-        if (CreatRandomValue())
+        if (CreatRandomValue(0,_skillUnit))
         {
             System.out.println("!! 크리티컬 발생 !!");
             _deffense.beforeHP = _deffense.HP;

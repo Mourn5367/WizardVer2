@@ -10,6 +10,7 @@ public interface Wizard
     int WIZARDORIGINDMG = 5;
     int[] WIZARDSKILLDMG = {30};
     int WIZARDCRITICALADDITIONALDMG = 10;
+    double WIZARDCRITICALPERCENT = 0.3;
     default void SetWizard(Player _player)
     {
         _player.unitClass = UNITCLASSNAME;
@@ -21,6 +22,7 @@ public interface Wizard
         _player.originDMG = WIZARDORIGINDMG;
         _player.skillDMG = WIZARDSKILLDMG;
         _player.criticalDMG = WIZARDCRITICALADDITIONALDMG;
+        _player.criticalPercent = WIZARDCRITICALPERCENT;
 
         _player.maxMP = WIZARDMAXMP;
         _player.MP = _player.maxMP;

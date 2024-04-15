@@ -2,6 +2,7 @@ abstract class SkillUnit extends Unit
 {
     int skillDMG[];
     int criticalDMG;
+    double criticalPercent;
     int maxMP;
     int MP;
     int beforeMP;
