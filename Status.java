@@ -62,7 +62,7 @@ public class Status implements LoadingText
         UnitHPPrint(_unit2);
         System.out.println("의 체력이 되었다...!!\n");
     }
-    public void AfterUnitSkillStatus(SkillUnit _skillUnit, int selectSkill) //나중에 마법여러개 일때는 바꿔야함
+    public void AfterUnitSkillStatus(SkillUnit _skillUnit, int selectSkill)
     {
         System.out.printf("%s을(를) 사용하여 기력을 %d 사용했다\n" +
                 "기력이 %d/%d 남았다 !\n", _skillUnit.skill[selectSkill], _skillUnit.skillCost[selectSkill],
@@ -113,6 +113,10 @@ public class Status implements LoadingText
         if (_damage % 10 !=0)
         {
             System.out.printf("💔");
+        }
+        else if (_damage <= 0)
+        {
+            System.out.printf("🤍");
         }
         for (int i = 0; i < _damage/10; i++)
         {

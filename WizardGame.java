@@ -19,7 +19,7 @@ public class WizardGame
         while(true)
         {
             status.SelectText(player.ableList);
-            combat.UnitAttack(inputUserCommand.InputInt(player.ableList),player,enemy
+            combat.UnitAttack(inputUserCommand.InputArray(player.ableList),player,enemy
                     ,status,inputUserCommand);
             if(!combatCondition.IsEscape(enemy,status)) {break;}
             status.UnitStatus(enemy);

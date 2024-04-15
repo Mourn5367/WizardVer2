@@ -8,7 +8,7 @@ public class InputUserCommand
        this.scanner = new Scanner(System.in);
     }
 
-    public int InputInt(String[] _inputArray)
+    public int InputArray(String[] _inputArray)
     {
         return ParsingInt(_inputArray);
     }
@@ -54,13 +54,13 @@ public class InputUserCommand
 
     public int SelectSkill(SkillUnit _skillUnit, Status _status)
     {
-        int selectSkill = InputInt(_skillUnit.skill) - 1;
+        int selectSkill = InputArray(_skillUnit.skill) - 1;
 
         while(_skillUnit.MP < _skillUnit.skillCost[selectSkill])
         {
             _status.NotEnoughMPPrint(_skillUnit,selectSkill);
             _status.SelectText(_skillUnit.skill);
-            selectSkill = InputInt(_skillUnit.skill) - 1;
+            selectSkill = InputArray(_skillUnit.skill) - 1;
         }
         return selectSkill;
     }

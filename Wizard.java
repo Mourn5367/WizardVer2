@@ -5,7 +5,7 @@ public interface Wizard
     int WIZARDMAXHP = 80;
     int WIZARDMAXMP = 100;
     String[] WIZARDABLELIST ={"기본 공격","마법 공격"};
-    String[] WIZARDSKILL = {"짱센마법","더짱센마법"};
+    String[] WIZARDSKILL = {"짱센마법","더 짱센마법"};
     int[] WIZARDSKILLCOST = {30,60};
     int WIZARDORIGINDMG = 5;
     int[] WIZARDSKILLDMG = {30,80};
