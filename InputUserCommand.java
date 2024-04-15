@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class InputUserCommand
 {
-    private Scanner scanner;
+    public Scanner scanner;
     public InputUserCommand()
     {
        this.scanner = new Scanner(System.in);
@@ -56,18 +56,18 @@ public class InputUserCommand
     {
         int selectSkill = InputInt(_skillUnit.skill) - 1;
 
-        while(_skillUnit.MP <= _skillUnit.skillCost[selectSkill])
+        while(_skillUnit.MP < _skillUnit.skillCost[selectSkill])
         {
-            selectSkill = InputInt(_skillUnit.skill);
             _status.NotEnoughMPPrint(_skillUnit,selectSkill);
-            _status.SkillUnitSelectText(_skillUnit);
+            _status.SelectText(_skillUnit.skill);
+            selectSkill = InputInt(_skillUnit.skill) - 1;
         }
         return selectSkill;
     }
 
     public void SetName(Unit _unit,Status status)
     {
-        StringBuilder stringBuilder = new StringBuilder();
+
         int maxNameLength = 7;
         String setNameMenu[] = {"작명한다.","기본이름으로"};
         status.SelectText(setNameMenu);

@@ -5,10 +5,10 @@ public interface Wizard
     int WIZARDMAXHP = 80;
     int WIZARDMAXMP = 100;
     String[] WIZARDABLELIST ={"기본 공격","마법 공격"};
-    String[] WIZARDSKILL = {"짱센마법"}; // 마법 관련은 중첩 클래스 도입해야 편함
-    int[] WIZARDSKILLCOST = {30};
+    String[] WIZARDSKILL = {"짱센마법","더짱센마법"};
+    int[] WIZARDSKILLCOST = {30,60};
     int WIZARDORIGINDMG = 5;
-    int[] WIZARDSKILLDMG = {30};
+    int[] WIZARDSKILLDMG = {30,80};
     int WIZARDCRITICALADDITIONALDMG = 10;
     double WIZARDCRITICALPERCENT = 0.3;
     default void SetWizard(Player _player)

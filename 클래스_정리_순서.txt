@@ -10,8 +10,11 @@ Wizard	Monster
 Combat
 Attack
 
-CombatCodition
+CombatCondition
 
 Status
 
+InputUserCommand
+
 LoadingText
+

@@ -1,6 +1,7 @@
 import java.security.SecureRandom;
 interface Attack extends LoadingText
 {
+    SecureRandom random = new SecureRandom();
     default boolean CreatRandomValue(int _selectRandomValue,SkillUnit _skillUnit) // 0은 크리티컬
     {
         double ranValue = random.nextDouble();
@@ -15,7 +16,6 @@ interface Attack extends LoadingText
                 return false;
         }
     }
-    SecureRandom random = new SecureRandom();
     default void OriginAttack(Unit _offense,Unit _defense)
     {
         System.out.printf("%s !!\n",_offense.ableList[0]);
@@ -23,7 +23,7 @@ interface Attack extends LoadingText
         _defense.HP -= _offense.originDMG;
     }
 
-    default void PlayerSkillAttack(SkillUnit _skillUnit, Unit _deffense, int _sellectSkill) throws InterruptedException {
+    default void SkillAttack(SkillUnit _skillUnit, Unit _deffense, int _sellectSkill) throws InterruptedException {
         _skillUnit.beforeMP = _skillUnit.MP;
         _skillUnit.MP -= _skillUnit.skillCost[_sellectSkill];
         System.out.printf("%s !!\n",_skillUnit.skill[_sellectSkill]);
@@ -65,18 +65,19 @@ interface Attack extends LoadingText
                     }
                     else
                     {
-                        _status.SkillUnitSkillPrint(player);
                         int selectSkill = 0;
+                        _status.SelectText(player.skill);
                         selectSkill = _inputUserCommand.SelectSkill(player, _status);
-                        PlayerSkillAttack(player, _defense, selectSkill);
+                        SkillAttack(player, _defense, selectSkill);
                         _status.AfterUnitSkillStatus(player,selectSkill);
-                        break;
                     }
+                    break;
                 }
                 else if(_unit instanceof Enemy)
                 {
 
                 }
+                break;
         }
     }
 

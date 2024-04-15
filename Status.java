@@ -44,15 +44,7 @@ public class Status implements LoadingText
         }
         System.out.println();
     }
-    public void SkillUnitSelectText(SkillUnit _SkillUnit)
-    {
-        for (int i = 0; i < _SkillUnit.ableList.length; i++)
-        {
-            System.out.printf("%d. %s\t",i+1,_SkillUnit.ableList[i]);
-        }
-        System.out.println();
-    }
-    public void AfterCombatStatusText(Unit _unit1, Unit _unit2)
+    public void AfterCombatStatusText(Unit _unit1, Unit _unit2) //이모티콘이 깨질경우
     {
         System.out.printf("%s(이)가 %d의 피해를 입어 %d/%d의 체력이 되었고 %s(이)가 %d의 피해를 입어 %d/%d 체력이 되었다!\n"
                 ,_unit1.name, _unit1.beforeHP - _unit1.HP, _unit1.HP,_unit1.maxHP,
@@ -99,15 +91,7 @@ public class Status implements LoadingText
                 ,skillUnit.MP,skillUnit.skillCost[_selectSkill],skillUnit.skill[_selectSkill]);
 
     }
-    public void SkillUnitSkillPrint(SkillUnit _skillUnit)
-    {
-        for (int i = 0; i < _skillUnit.skill.length;i++)
-        {
-            System.out.printf("%d. ",i+1);
-            System.out.printf("%s ",_skillUnit.skill[i]);
-        }
-        System.out.println();
-    }
+
 
     public void UnitHPPrint(Unit _unit)
     {

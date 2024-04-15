@@ -23,7 +23,8 @@ public class WizardGame
                     ,status,inputUserCommand);
             if(!combatCondition.IsEscape(enemy,status)) {break;}
             status.UnitStatus(enemy);
-            combat.OriginAttack(enemy,player);
+            combat.UnitAttack(1,enemy,player
+                    ,status,inputUserCommand);
             if(!combatCondition.IsEscape(player,status)) {break;}
             status.UnitStatus(player);
             status.AfterCombatStatusSymbol(player,enemy);
