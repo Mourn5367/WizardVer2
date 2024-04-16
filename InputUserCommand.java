@@ -6,14 +6,15 @@ public class InputUserCommand
     public InputUserCommand()
     {
        this.scanner = new Scanner(System.in);
-    }
+    } // 객체가 생성될때 스캐너 객체 생성
 
     public int InputArray(String[] _inputArray)
     {
         return ParsingInt(_inputArray);
     }
+    // 행동 선택지를 넣고 유저가 숫자 입력값을 반환 
 
-    public int ParsingInt(String[] _inputArray )
+    public int ParsingInt(String[] _inputArray ) // 선택지 이외의 숫자, 숫자 이외의 값을 거르기 위해
     {
         boolean noneException =false;
         int noneExceptionIntText = 0;
@@ -52,7 +53,7 @@ public class InputUserCommand
         return noneExceptionIntText;
     }
 
-    public int SelectSkill(SkillUnit _skillUnit, Status _status)
+    public int SelectSkill(SkillUnit _skillUnit, Status _status) // 어떤 스킬을 고를지 입력받음
     {
         int selectSkill = InputArray(_skillUnit.skill) - 1;
 
@@ -65,7 +66,7 @@ public class InputUserCommand
         return selectSkill;
     }
 
-    public void SetName(Unit _unit,Status status)
+    public void SetName(Unit _unit,Status status) // 유닛을 작명함
     {
 
         int maxNameLength = 7;

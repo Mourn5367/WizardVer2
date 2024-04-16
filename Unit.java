@@ -1,5 +1,6 @@
 abstract class Unit
 {
+    // 모든 유닛은 이 값은 가지고 있어야 함.
     protected String unitClass;
     protected String name;
     protected int maxHP;

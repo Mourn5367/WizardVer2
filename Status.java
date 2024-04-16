@@ -2,7 +2,7 @@ import java.util.Random;
 public class Status implements LoadingText
 {
     Random random = new Random();
-    public void TimeSleep(int _time,String _message)
+    public void TimeSleep(int _time,String _message) // 3번 멈추는 함수
     {
         for (int i = 0; i < 3; i++ )
         {
@@ -20,7 +20,7 @@ public class Status implements LoadingText
                 ,_unit1.unitClass,_unit1.name, _unit2.unitClass,_unit2.name);
     }
 
-    public void UnitStatus(Unit _unit)
+    public void UnitStatus(Unit _unit) // 스킬 유닛일 경우 MP표시 아니면 HP까지만
     {
         SkillUnit skillUnit;
         if (_unit instanceof SkillUnit)
@@ -36,7 +36,7 @@ public class Status implements LoadingText
                     ,_unit.unitClass,_unit.name, _unit.HP,_unit.maxHP);
         }
     }
-    public void SelectText(String[] _array)
+    public void SelectText(String[] _array) // 선택지 출력
     {
         for (int i = 0; i < _array.length; i++)
         {
@@ -50,15 +50,15 @@ public class Status implements LoadingText
                 ,_unit1.name, _unit1.beforeHP - _unit1.HP, _unit1.HP,_unit1.maxHP,
                 _unit2.name, _unit2.beforeHP - _unit2.HP, _unit2.HP,_unit2.maxHP);
     }
-    public void AfterCombatStatusSymbol(Unit _unit1, Unit _unit2)
+    public void AfterCombatStatusSymbol(Unit _unit1, Unit _unit2) // 전투요약을 이모티콘으로
     {
         System.out.printf("%s(이)가 ",_unit1.name);
         UnitHPPrint(_unit1.beforeHP - _unit1.HP);
-        System.out.printf("의 피해를 입어 ");
+        System.out.print("의 피해를 입어 ");
         UnitHPPrint(_unit1);
         System.out.printf("의 체력이 되었고 %s가 ",_unit2.name);
         UnitHPPrint(_unit2.beforeHP - _unit2.HP);
-        System.out.printf("의 피해를 입어 ");
+        System.out.print("의 피해를 입어 ");
         UnitHPPrint(_unit2);
         System.out.println("의 체력이 되었다...!!\n");
     }
@@ -69,6 +69,7 @@ public class Status implements LoadingText
                                     _skillUnit.MP,_skillUnit.maxMP);
     }
     public void EndCombatPrint(boolean _isEscapeCombatCondition, Unit _unit)
+            // 전투가 결착이 났을때 나오는 함수
     {
         if (_isEscapeCombatCondition)
         {
@@ -85,7 +86,8 @@ public class Status implements LoadingText
             }
         }
     }
-    public void NotEnoughMPPrint(SkillUnit skillUnit,int _selectSkill) // 스킬 추가 되면 변경
+    public void NotEnoughMPPrint(SkillUnit skillUnit,int _selectSkill)
+            // 선택한 스킬보다 MP가 없을 경우
     {
         System.out.printf("기력이 %d이므로 기력 %d(을)를 소모하는 %s을 할수없어 !!\n"
                 ,skillUnit.MP,skillUnit.skillCost[_selectSkill],skillUnit.skill[_selectSkill]);
@@ -94,6 +96,8 @@ public class Status implements LoadingText
 
 
     public void UnitHPPrint(Unit _unit)
+    // 현재 DMG 최소 단위가 5부터 하고 있어 10 아래의 체력은 깨진하트
+    // 10부터는 완성된 하트 줄어든 체력은 빈 하트로 표현        
     {
         if (_unit.HP % 10 !=0)
         {

@@ -1,5 +1,6 @@
 public interface Wizard
 {
+    // 직업이 Wizard인 경우 이 값을 가져야 함
     String WIZARDNAME = "Gandalf";
     String UNITCLASSNAME = "Wizard";
     int WIZARDMAXHP = 80;
@@ -11,6 +12,7 @@ public interface Wizard
     int[] WIZARDSKILLDMG = {30,80};
     int WIZARDCRITICALADDITIONALDMG = 10;
     double WIZARDCRITICALPERCENT = 0.3;
+    // 마법 별로 크리티컬이 달라지면 크리티컬 계수도 배열로 바꿔야함
     default void SetWizard(Player _player)
     {
         _player.unitClass = UNITCLASSNAME;
@@ -18,8 +20,9 @@ public interface Wizard
         _player.maxHP = WIZARDMAXHP;
         _player.HP = _player.maxHP;
         _player.beforeHP = 0;
-
         _player.originDMG = WIZARDORIGINDMG;
+        _player.ableList = WIZARDABLELIST; // 여기 까지 Unit값 설정
+        
         _player.skillDMG = WIZARDSKILLDMG;
         _player.criticalDMG = WIZARDCRITICALADDITIONALDMG;
         _player.criticalPercent = WIZARDCRITICALPERCENT;
@@ -30,7 +33,7 @@ public interface Wizard
 
         _player.skillCost = WIZARDSKILLCOST;
         _player.skill = WIZARDSKILL;
-        _player.ableList = WIZARDABLELIST;
+
         _player.minCost = _player.MinSkillCost();
     }
 
