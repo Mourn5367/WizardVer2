@@ -1,3 +1,8 @@
+// 2024_04_16_알고리즘_실습과제
+// 한국폴리텍대학_서울정수캠퍼스_인공지능소프트웨어학과
+// 2401110252_박지수
+// 마법사로 몬스터를 물리치는 게임
+// https://github.com/Mourn5367/WizardVer2
 public class WizardGame
 {
     public static void main(String[] args) throws InterruptedException {

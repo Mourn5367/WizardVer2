@@ -2,7 +2,7 @@ import java.security.SecureRandom;
 interface Attack extends LoadingText
 {
     SecureRandom random = new SecureRandom();
-    default boolean CreatRandomValue(SkillUnit _skillUnit) // 0은 크리티컬
+    default boolean CreatRandomValue(SkillUnit _skillUnit)
     {
         double ranValue = random.nextDouble();
         return ranValue < _skillUnit.criticalPercent; // 확률을 통과 했으면 true

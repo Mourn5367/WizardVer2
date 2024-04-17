@@ -36,6 +36,4 @@ public interface Wizard
 
         _player.minCost = _player.MinSkillCost();
     }
-
-
 }

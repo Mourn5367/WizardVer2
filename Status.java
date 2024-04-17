@@ -97,7 +97,7 @@ public class Status implements LoadingText
 
     public void UnitHPPrint(Unit _unit)
     // 현재 DMG 최소 단위가 5부터 하고 있어 10 아래의 체력은 깨진하트
-    // 10부터는 완성된 하트 줄어든 체력은 빈 하트로 표현        
+    // 10부터는 완성된 하트 줄어든 체력은 빈 하트로 표현
     {
         if (_unit.HP % 10 !=0)
         {
@@ -127,7 +127,4 @@ public class Status implements LoadingText
             System.out.printf("💖");
         }
     }
-
-
-
 }
